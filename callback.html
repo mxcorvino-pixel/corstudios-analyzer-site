@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Connection step - Cor Studios Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    textarea { width:100%; min-height:110px; font:13px/1.4 ui-monospace,Menlo,Consolas,monospace;
+      background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:6px; padding:10px; }
+    button { font:inherit; padding:8px 16px; border-radius:6px; border:1px solid var(--line);
+      background:var(--accent); color:#fff; cursor:pointer; }
+    .warn { border-left:4px solid var(--accent); padding:4px 12px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Almost done</h1>
+  <p class="meta">Cor Studios Analyzer &middot; TikTok connection</p>
+
+  <p>TikTok has sent you back to this page. This page does not store or send anything: it only
+  displays the address of this page so you can copy it.</p>
+
+  <h2>Next step</h2>
+  <ol>
+    <li>Click <strong>Copy</strong> below (or copy the full address from your browser's address bar).</li>
+    <li>Return to the Cor Studios Analyzer dashboard and paste it into the prompt that is waiting.</li>
+  </ol>
+
+  <textarea id="url" readonly aria-label="Full page address"></textarea>
+  <p><button id="copy" type="button">Copy</button> <span id="status" class="meta"></span></p>
+
+  <p class="warn">This address contains a one-time code that is valid for a few minutes.
+  Paste it only into your own Cor Studios Analyzer. Do not share it with anyone.</p>
+
+  <footer><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a></footer>
+</main>
+<script>
+  (function () {
+    var box = document.getElementById("url");
+    var status = document.getElementById("status");
+    box.value = window.location.href;
+    if (/[?&]error=/.test(window.location.search)) {
+      status.textContent = "TikTok reported that access was not granted. You can paste this anyway to see the reason, or start again.";
+    }
+    document.getElementById("copy").addEventListener("click", function () {
+      box.select();
+      var done = function () { status.textContent = "Copied."; };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(box.value).then(done, function () {
+          document.execCommand("copy"); done();
+        });
+      } else { document.execCommand("copy"); done(); }
+    });
+  })();
+</script>
+</body>
+</html>
