@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Finishing connection - Cor Studios Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>Finishing your connection&hellip;</h1>
+  <p class="meta">Cor Studios Analyzer</p>
+  <p id="msg">Sending you back to your Cor Studios dashboard on this computer.</p>
+  <p id="fallback" hidden>If nothing happens, make sure the dashboard is running
+  (<code>bash scripts/run_dashboard.sh</code>) and <a id="link" href="#">click here</a>.</p>
+  <p class="meta">This page stores nothing and sends nothing to any server. It only hands the sign-in result to the
+  dashboard running on your own computer (localhost).</p>
+  <footer><a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Service</a></footer>
+</main>
+<script>
+  (function () {
+    // Fixed destination: only this computer's dashboard. The address is never taken from the page URL.
+    var target = "http://localhost:8000/oauth/callback" + window.location.search;
+    document.getElementById("link").href = target;
+    setTimeout(function () { document.getElementById("fallback").hidden = false; }, 4000);
+    window.location.replace(target);
+  })();
+</script>
+</body>
+</html>
